@@ -3,9 +3,8 @@ import java.util.Scanner;
 import java.lang.Math;
 
 public class HW1_20 {
-
     public static void main(String[] args) {
-       Scanner in = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
         System.out.println("Enter amount of number in array :");
         int n = in.nextInt();
         int[] list = new int[n];
@@ -20,21 +19,20 @@ public class HW1_20 {
                 if (list[i] > list[i - 1]) {
                     if (kgrow >= pgrow) {
                         pgrow = kgrow;
-
                     }
                 }
                 break;
-            } else if (list[i] < list[i + 1]) {
+            }
+            else if (list[i] < list[i + 1]) {
                 kgrow += 1;
                 if (kgrow >= pgrow) {
                     pgrow = kgrow;
                 }
-            } else {
+            }
+            else {
                 kgrow = 1;
             }
         }
-
-
         int kdecline = 1, pdecline = 1;
         for (int i = 0; i < n; i++) {
             if (i + 1 == n) {
@@ -44,57 +42,73 @@ public class HW1_20 {
                     }
                 }
                 break;
-            } else if (list[i] > list[i + 1]) {
+            }
+            else if (list[i] > list[i + 1]) {
                 kdecline += 1;
                 if (kdecline >= pdecline) {
                     pdecline = kdecline;
                 }
-            } else {
+            }
+            else {
                 kdecline = 1;
             }
         }
-
         System.out.println("Full array : " + Arrays.toString(list));
-        if (Math.max(pdecline, pgrow) == pgrow) {
-            int[] list_max = new int[pgrow];
-            int k = 1, p = 1;
-            int v = 0;
+
+        int k = 1;
+
+        if(Math.max(pdecline, pgrow) == pdecline){
             for (int i = 0; i < n; i++) {
                 if (i + 1 == n) {
-                    if (list[i] < list[i - 1]) {
-                        if (k == kgrow) {
-                            for (int t = i + 1 - pgrow; t < i + 1; t++) {
-                                for (int h = 0; h < pgrow - 1; h++) {
-                                    list_max[h] = list[t];
-                                }
-                            }
-                            System.out.println(Arrays.toString(list_max));
+                    if(list[i] < list[i-1]){
+                        if (k == pdecline) {
+                            System.out.print(list[i] );
+                        }
+                    }
+                    break;
+                }
+                else if (list[i] > list[i + 1]) {
+                    k += 1;
+                    if (k == pdecline) {
+                        System.out.println("\n------");
+                        System.out.println("Growing array :");
+                        for( int m = pdecline - 1; m >= 0 ; m--){
+                            System.out.print(list[i - m + 1] + " "  );
                             k = 1;
-                            v = 0;
+                        }
+                    }
+                }
+                else {
+                    k = 1;
+                }
+            }
+        }
+        if(Math.max(pdecline, pgrow) == pdecline){
+            for (int i = 0; i < n; i++) {
+                if (i + 1 == n) {
+                    if(list[i] > list[i-1]){
+                        if (k == pdecline) {
+                            System.out.print(list[i] );
                         }
                     }
                     break;
                 }
                 else if (list[i] < list[i + 1]) {
                     k += 1;
-                    if (k == kgrow) {
-                        for (int t = i + 1 - pgrow; t < i + 1; t++) {
-                            for (int h = 0; h < pgrow - 1; h++) {
-                                list_max[h] = list[t];
-                            }
+                    if (k == pdecline) {
+                        System.out.println("\n------");
+                        System.out.println("Declining arry :");
+                        for( int m = pdecline - 1; m >= 0 ; m--){
+                            System.out.print(list[i - m + 1] + " "  );
+                            k = 1;
                         }
-                        System.out.println(Arrays.toString(list_max));
-                        k = 1;
-                        v = 0;
-                    }
-                    else {
-                        k = 1;
                     }
                 }
-
+                else {
+                    k = 1;
+                }
             }
         }
+
     }
 }
-
-
